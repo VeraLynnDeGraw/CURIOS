@@ -1,0 +1,30 @@
+CURIOS — COMMAND REFERENCE
+
+Start CURIOS:
+    python -m curios
+
+Start the terminal control menu:
+    ./curios-menu.sh
+
+Open the local interface:
+    http://127.0.0.1:8765
+
+Check Python modules:
+    python -m py_compile curios/*.py
+
+Check JavaScript (if Node.js is installed):
+    node --check web/app.js
+
+Stop CURIOS:
+    Press Ctrl+C in the terminal running CURIOS,
+    or use the Power Off control in the interface.
+
+Provider configuration:
+    ~/.config/curios/providers.json
+
+Dedicated browser profile:
+    ~/.local/share/curios/browser-profile
+
+Security note:
+    Provider API keys are stored locally, unencrypted,
+    with owner-only filesystem permissions.

@@ -1,0 +1,234 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#09090d">
+  <title>CURIOS — A Space for Exploration</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+
+    <!-- CURIOS HEADER -->
+    <header class="topbar">
+      <div class="brand">
+
+        <!-- MOON NETWORK SWITCH -->
+        <button
+          id="network-toggle"
+          class="mark network-toggle"
+          type="button"
+          aria-label="Network is offline. Activate to go online."
+          aria-pressed="false"
+          title="Activate network connections"
+        >
+          <svg
+            class="moon-logo"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M25 4
+                 C14 4 6 11.2 6 20
+                 C6 28.8 14 36 25 36
+                 C18.5 31.8 15 26.2 15 20
+                 C15 13.8 18.5 8.2 25 4Z"
+              fill="#f5f2ff"
+            />
+          </svg>
+        </button>
+
+        <div class="brand-copy">
+          <h1>CURIOS</h1>
+          <p>A space for exploration</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+
+        <!-- NETWORK STATUS -->
+        <div
+          id="network-status"
+          class="status"
+          data-state="offline"
+          aria-live="polite"
+        >
+          <span class="dot"></span>
+          <span id="network-label">OFFLINE</span>
+          <span class="status-divider">·</span>
+          <span>LOCAL SESSION</span>
+        </div>
+
+        <button
+          id="power-off"
+          class="power-button"
+          type="button"
+          title="Stop CURIOS and close its dedicated browser session"
+        >
+          Power off
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN WORKSPACE -->
+    <section class="workspace">
+
+      <!-- PROVIDER SIDEBAR -->
+      <aside class="sidebar">
+        <div class="section-heading">
+          <span>CONNECTIONS</span>
+          <button id="add-provider" class="text-button">+ Add</button>
+        </div>
+
+        <div id="provider-list" class="provider-list">
+          <p class="muted small">No providers configured.</p>
+        </div>
+
+        <div class="sidebar-note">
+          <span class="note-icon">◇</span>
+          <p>Your keys stay in your local user configuration. They are never sent to this interface.</p>
+        </div>
+      </aside>
+
+      <!-- CHAT AREA -->
+      <section class="chat-panel">
+
+        <div class="chat-heading">
+          <div>
+            <p class="eyebrow">CONVERSATION SPACE</p>
+            <h2 id="active-provider">Choose a connection</h2>
+          </div>
+
+          <span id="model-label" class="model-label">
+            No model selected
+          </span>
+        </div>
+
+        <div id="messages" class="messages">
+          <div class="welcome">
+            <div class="welcome-symbol">☾</div>
+            <h2>A little room for big questions.</h2>
+            <p>Add an API connection, choose a model, and start a conversation.</p>
+          </div>
+        </div>
+
+        <!-- MESSAGE COMPOSER -->
+        <form id="chat-form" class="composer">
+          <textarea
+            id="message-input"
+            rows="2"
+            placeholder="Choose a provider to begin…"
+            disabled
+          ></textarea>
+
+          <div class="composer-bottom">
+            <span id="composer-hint">Select a connection first</span>
+            <button id="send-button" type="submit" disabled>
+              Send <span>↗</span>
+            </button>
+          </div>
+        </form>
+
+      </section>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>CURIOS · LOCAL-FIRST</span>
+      <span>Nothing runs unless you start it.</span>
+    </footer>
+
+  </main>
+
+  <!-- PROVIDER SETUP DIALOG -->
+  <dialog id="provider-dialog">
+    <form id="provider-form" method="dialog">
+
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">CONNECTION SETUP</p>
+          <h2>Add a provider</h2>
+        </div>
+
+        <button
+          type="button"
+          id="close-dialog"
+          class="close-button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+      </div>
+
+      <label>
+        Display name
+        <input
+          name="name"
+          placeholder="Ollama"
+          required
+          maxlength="60"
+        >
+      </label>
+
+      <label>
+        API base URL
+        <input
+          name="base_url"
+          placeholder="http://127.0.0.1:11434/v1"
+          required
+        >
+      </label>
+
+      <label>
+        Model
+        <input
+          name="model"
+          placeholder="qwen2.5:latest"
+          required
+        >
+      </label>
+
+      <label>
+        API key
+        <span class="optional">(optional for local services)</span>
+        <input
+          name="api_key"
+          type="password"
+          autocomplete="off"
+          placeholder="Paste API key"
+        >
+      </label>
+
+      <p class="dialog-note">
+        Compatible with the OpenAI Chat Completions API format.
+        Keys are saved locally with owner-only file permissions.
+      </p>
+
+      <div class="dialog-actions">
+        <button
+          type="button"
+          id="cancel-dialog"
+          class="secondary-button"
+        >
+          Cancel
+        </button>
+
+        <button type="submit" class="primary-button">
+          Save connection
+        </button>
+      </div>
+
+    </form>
+  </dialog>
+
+  <!-- STATUS NOTIFICATIONS -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

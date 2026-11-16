@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+providers.json
+
+# CURIOS local data
+browser-profile/
+*.log
+
+# Development backups
+*.backup
+*.before-*
+curios/network_state.py
+
+# Operating system / editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
